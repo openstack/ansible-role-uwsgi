@@ -1,0 +1,30 @@
+[uwsgi]
+uid = {{ item.value.uwsgi_uid | default(uwsgi_system_user_name) }}
+gid = {{ item.value.uwsgi_guid | default(uwsgi_system_group_name) }}
+
+{% if 'wsgi_venv' in item.value and item.value.wsgi_venv %}
+virtualenv = {{ item.value.wsgi_venv }}
+{% endif %}
+{% if uwsgi_install_method == 'distro' and (ansible_os_family | lower) == 'debian' %}
+plugin = python3
+{% endif %}
+wsgi-file = {{ item.value.wsgi_path }}
+http-socket = {{ item.value.uwsgi_bind_address | default('0.0.0.0') }}:{{ item.value.uwsgi_port | default(8080) }}
+
+master = true
+enable-threads = true
+processes = {{ item.value.uwsgi_processes | default([ansible_processor_vcpus | default(1), 1] | max * 2) }}
+threads = {{ item.value.uwsgi_threads | default(1) }}
+exit-on-reload = true
+die-on-term = true
+lazy-apps = true
+add-header = Connection: close
+buffer-size = 65535
+thunder-lock = true
+disable-logging = true
+http-auto-chunked = true
+http-raw-body = true
+socket-timeout = 10
+
+# Avoid filling up the logs with health check requests from haproxy.
+route-user-agent = ^osa-haproxy-healthcheck$ donotlog:
