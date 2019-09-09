@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-uwsgi_bin: "/openstack/venvs/uwsgi-{{ uwsgi_venv_tag }}/bin"
+uwsgi_bin: "/openstack/venvs/uwsgi-{{ uwsgi_venv_tag }}-{{ uwsgi_python_executable }}/bin"
 
 uwsgi_package list: []
 uwsgi_pip_packages:
