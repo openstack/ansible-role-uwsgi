@@ -17,4 +17,4 @@ uwsgi_bin: '/usr/sbin'
 
 uwsgi_distro_packages:
   - uwsgi
-  - uwsgi-python
+  - uwsgi-python3
