@@ -8,7 +8,11 @@ virtualenv = {{ item.value.wsgi_venv }}
 {% if uwsgi_install_method == 'distro' and (ansible_os_family | lower) in ['debian', 'suse' ] %}
 plugin = python3
 {% endif %}
+{% if 'wsgi_path' in item.value %}
 wsgi-file = {{ item.value.wsgi_path }}
+{% elif 'wsgi' in item.value %}
+wsgi = {{ item.value.wsgi }}
+{% endif %}
 http-socket = {{ item.value.uwsgi_bind_address | default('0.0.0.0') }}:{{ item.value.uwsgi_port | default(8080) }}
 
 master = true
