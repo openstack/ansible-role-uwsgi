@@ -34,7 +34,7 @@
     name: systemd_service
   vars:
     systemd_user_name: "{{ service_var.value.uwsgi_uid | default(uwsgi_system_user_name) }}"
-    systemd_group_name: "{{ service_var.value.uwsgi_uid | default(uwsgi_system_user_name) }}"
+    systemd_group_name: "{{ service_var.value.uwsgi_guid | default(uwsgi_system_group_name) }}"
     systemd_tempd_prefix: openstack
     systemd_slice_name: uwsgi
     systemd_lock_path: "/var/lock/uwsgi"
