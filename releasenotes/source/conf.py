@@ -62,11 +62,6 @@ role_name = 'uwsgi'
 target_name = 'ansible-role-uwsgi'
 title = 'OpenStack-Ansible Release Notes: ' + role_name + 'role'
 
-# The link to the browsable source code (for the left hand menu)
-oslosphinx_cgit_link = (
-    'https://opendev.org/openstack/{}'.format(target_name)
-)
-
 # Release notes do not need a version number in the title, they
 # cover multiple releases.
 # The full version, including alpha/beta/rc tags.
