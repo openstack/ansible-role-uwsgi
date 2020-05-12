@@ -15,7 +15,7 @@
 
 - name: Gather variables for each operating system
   include_vars: "{{ item }}"
-  when: uwsgi_services
+  when: uwsgi_services | length > 0
   with_first_found:
     - "{{ ansible_distribution | lower }}.yml"
     - "{{ ansible_os_family | lower }}.yml"
@@ -24,16 +24,16 @@
 
 - name: Gather variables for installation method
   include_vars: "{{ uwsgi_install_method }}_install.yml"
-  when: uwsgi_services
+  when: uwsgi_services | length > 0
   tags:
     - always
 
 - import_tasks: uwsgi_install.yml
-  when: uwsgi_services
+  when: uwsgi_services | length > 0
   tags:
     - uwsgi-install
 
 - import_tasks: uwsgi_post_install.yml
-  when: uwsgi_services
+  when: uwsgi_services | length > 0
   tags:
     - uwsgi-config
