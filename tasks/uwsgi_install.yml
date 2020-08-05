@@ -55,5 +55,5 @@
     venv_facts_when_changed:
       - section: 'uwsgi'
         option: 'venv_tag'
-        value: uwsgi_venv_tag
+        value: "{{ uwsgi_venv_tag }}"
   when: uwsgi_install_method == 'source'
