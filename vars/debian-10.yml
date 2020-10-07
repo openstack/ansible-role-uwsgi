@@ -19,5 +19,6 @@ cache_timeout: 600
 uwsgi_bin: '/usr/bin'
 
 uwsgi_distro_packages:
+  - libpython3.7
   - uwsgi
   - uwsgi-plugin-python3
