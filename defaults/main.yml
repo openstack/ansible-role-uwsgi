@@ -46,3 +46,8 @@ uwsgi_package_state: "latest"
 #     uwsgi_bind_address: 0.0.0.0
 #     uwsgi_port: 8080
 uwsgi_services: {}
+
+# Override can be used to apply config change to all uwsgi services
+# instead of adjusting each service separately
+uwsgi_ini_overrides: {}
+uwsgi_init_config_overrides: {}

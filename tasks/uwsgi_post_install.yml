@@ -23,7 +23,7 @@
     src: uwsgi.ini.j2
     dest: "/etc/uwsgi/{{ item.key }}.ini"
     config_type: "ini"
-    config_overrides: "{{ item.value.uwsgi_overrides | default({}) }}"
+    config_overrides: "{{ item.value.uwsgi_overrides | default({}) | combine(uwsgi_ini_overrides) }}"
   with_dict: "{{ uwsgi_services }}"
   notify:
     - Manage LB
@@ -48,7 +48,7 @@
         state: started
         execstarts: "{{ uwsgi_bin }}/uwsgi --autoload --ini /etc/uwsgi/{{ service_var.key }}.ini"
         execreloads: "{{ uwsgi_bin }}/uwsgi --reload /var/run/{{ service_var.key }}/{{ service_var.key }}.pid"
-        config_overrides: "{{ service_var.value.init_config_overrides | default({}) }}"
+        config_overrides: "{{ service_var.value.init_config_overrides | default({}) | combine(uwsgi_init_config_overrides) }}"
   with_dict: "{{ uwsgi_services }}"
   loop_control:
     loop_var: service_var
