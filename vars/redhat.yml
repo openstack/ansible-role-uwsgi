@@ -17,4 +17,4 @@ uwsgi_bin: '/usr/sbin'
 
 uwsgi_distro_packages:
   - uwsgi
-  - "{{ ansible_distribution_major_version is version('8', '<') | ternary('uwsgi-plugin-python', 'uwsgi-plugin-python3') }}"
+  - "{{ ansible_facts['distribution_major_version'] is version('8', '<') | ternary('uwsgi-plugin-python', 'uwsgi-plugin-python3') }}"

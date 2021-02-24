@@ -41,7 +41,7 @@ uwsgi_package_state: "latest"
 #     uwsgi_uid: root
 #     uwsgi_guid: root
 #     uwsgi_overrides: {}
-#     uwsgi_processes: [ansible_processor_vcpus | default(1), 1] | max * 2
+#     uwsgi_processes: [ansible_facts['processor_vcpus'] | default(1), 1] | max * 2
 #     uwsgi_threads: 1
 #     uwsgi_bind_address: 0.0.0.0
 #     uwsgi_port: 8080

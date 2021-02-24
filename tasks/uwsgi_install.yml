@@ -33,8 +33,8 @@
   package:
     name: "{{ uwsgi_package_list }}"
     state: "{{ uwsgi_package_state }}"
-    update_cache: "{{ (ansible_pkg_mgr in ['apt', 'zypper']) | ternary('yes', omit) }}"
-    cache_valid_time: "{{ (ansible_distribution | lower == 'debian') | ternary(cache_timeout, omit) }}"
+    update_cache: "{{ (ansible_facts['pkg_mgr'] in ['apt', 'zypper']) | ternary('yes', omit) }}"
+    cache_valid_time: "{{ (ansible_facts['distribution'] | lower == 'debian') | ternary(cache_timeout, omit) }}"
   register: install_packages
   until: install_packages is success
   retries: 5

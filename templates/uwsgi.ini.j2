@@ -5,7 +5,7 @@ gid = {{ item.value.uwsgi_guid | default(uwsgi_system_group_name) }}
 {% if 'wsgi_venv' in item.value and item.value.wsgi_venv %}
 virtualenv = {{ item.value.wsgi_venv }}
 {% endif %}
-{% if uwsgi_install_method == 'distro' and (ansible_os_family | lower) in ['debian', 'suse' ] %}
+{% if uwsgi_install_method == 'distro' and (ansible_facts['os_family'] | lower) in ['debian', 'suse' ] %}
 plugin = python3
 {% endif %}
 {% if 'wsgi_path' in item.value %}
@@ -17,7 +17,7 @@ http-socket = {{ item.value.uwsgi_bind_address | default('0.0.0.0') }}:{{ item.v
 
 master = true
 enable-threads = true
-processes = {{ item.value.uwsgi_processes | default([ansible_processor_vcpus | default(1), 1] | max * 2) }}
+processes = {{ item.value.uwsgi_processes | default([ansible_facts['processor_vcpus'] | default(1), 1] | max * 2) }}
 threads = {{ item.value.uwsgi_threads | default(1) }}
 exit-on-reload = true
 die-on-term = true
