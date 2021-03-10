@@ -24,7 +24,7 @@ uwsgi_install_method: source
 uwsgi_venv_tag: "{{ venv_tag | default('untagged') }}"
 
 uwsgi_pip_install_args: "{{ pip_install_options | default('') }}"
-uwsgi_python_executable: "python2"
+uwsgi_python_executable: "python3"
 
 uwsgi_package_state: "latest"
 
