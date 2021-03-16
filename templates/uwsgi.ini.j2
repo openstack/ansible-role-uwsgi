@@ -5,7 +5,7 @@ gid = {{ item.value.uwsgi_guid | default(uwsgi_system_group_name) }}
 {% if 'wsgi_venv' in item.value and item.value.wsgi_venv %}
 virtualenv = {{ item.value.wsgi_venv }}
 {% endif %}
-{% if uwsgi_install_method == 'distro' and (ansible_facts['os_family'] | lower) in ['debian', 'suse' ] %}
+{% if uwsgi_install_method == 'distro' and (ansible_facts['os_family'] | lower) == 'debian' %}
 plugin = python3
 {% endif %}
 {% if 'wsgi_path' in item.value %}

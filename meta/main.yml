@@ -5,15 +5,16 @@ galaxy_info:
   license: Apache2
   min_ansible_version: 2.8
   platforms:
+    - name: Debian
+      versions:
+        - buster
     - name: Ubuntu
       versions:
         - bionic
+        - focal
     - name: EL
       versions:
-        - 7
-    - name: opensuse
-      versions:
-        - 15
+        - 8
   galaxy_tags:
     - cloud
     - uwsgi
