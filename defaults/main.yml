@@ -28,6 +28,9 @@ uwsgi_python_executable: "python3"
 
 uwsgi_package_state: "latest"
 
+# Default environment variables to set for uwsgi process
+uwsgi_env: "{{ _uwsgi_env }}"
+
 # Define uwsgi_services for deployment of uwsgi. You should provide
 # at least wsgi_path and uwsgi_port. wsgi_venv should be defined for
 # services installed inside virtualenv.
@@ -45,6 +48,7 @@ uwsgi_package_state: "latest"
 #     uwsgi_threads: 1
 #     uwsgi_bind_address: 0.0.0.0
 #     uwsgi_port: 8080
+#     uwsgi_env: "FOO=bar"
 uwsgi_services: {}
 
 # Override can be used to apply config change to all uwsgi services

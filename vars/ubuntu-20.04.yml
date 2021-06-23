@@ -22,3 +22,5 @@ uwsgi_distro_packages:
   - libpython3.8
   - uwsgi
   - uwsgi-plugin-python3
+
+_uwsgi_env: "REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt"

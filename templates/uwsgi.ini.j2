@@ -30,6 +30,7 @@ http-auto-chunked = true
 http-raw-body = true
 socket-timeout = 10
 need-app = true
+env = {{ item.value.uwsgi_env |  default(uwsgi_env) }}
 
 log-x-forwarded-for = true
 # Avoid filling up the logs with health check requests from haproxy.
