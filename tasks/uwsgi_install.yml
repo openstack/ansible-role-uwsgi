@@ -42,7 +42,6 @@
   notify:
     - Manage LB
     - Restart uwsgi services
-  when: uwsgi_install_method == 'distro'
 
 - name: Install the python venv
   import_role:

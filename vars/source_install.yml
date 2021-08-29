@@ -15,6 +15,8 @@
 
 uwsgi_bin: "/openstack/venvs/uwsgi-{{ uwsgi_venv_tag }}-{{ uwsgi_python_executable }}/bin"
 
-uwsgi_package list: []
+uwsgi_package_list:
+  - gcc
+
 uwsgi_pip_packages:
   - uwsgi
