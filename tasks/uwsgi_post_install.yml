@@ -19,7 +19,7 @@
     state: directory
 
 - name: Deploy uWSGI configuration files
-  config_template:
+  openstack.config_template.config_template:
     src: uwsgi.ini.j2
     dest: "/etc/uwsgi/{{ item.key }}.ini"
     config_type: "ini"
