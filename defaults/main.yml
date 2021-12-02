@@ -15,7 +15,9 @@
 
 uwsgi_system_user_name: uwsgi
 uwsgi_system_group_name: uwsgi
-
+uwsgi_system_slice_name: uwsgi
+uwsgi_lock_dir: "{{ openstack_lock_dir | default('/run/lock') }}"
+uwsgi_run_dir: "{{ openstack_run_dir | default('/run') }}"
 
 # Set installation method. Valid options: source, distro
 uwsgi_install_method: source
