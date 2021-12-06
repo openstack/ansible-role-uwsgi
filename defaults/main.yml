@@ -51,6 +51,9 @@ uwsgi_env: "{{ _uwsgi_env }}"
 #     uwsgi_bind_address: 0.0.0.0
 #     uwsgi_port: 8080
 #     uwsgi_env: "FOO=bar"
+#     uwsgi_tls:
+#       crt: /path/to/crt
+#       key: /path/to/key
 uwsgi_services: {}
 
 # Override can be used to apply config change to all uwsgi services

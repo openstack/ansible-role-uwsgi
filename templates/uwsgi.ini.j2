@@ -13,7 +13,11 @@ wsgi-file = {{ item.value.wsgi_path }}
 {% elif 'wsgi' in item.value %}
 wsgi = {{ item.value.wsgi }}
 {% endif %}
+{% if item.value.uwsgi_tls | default({}) | length %}
+https-socket = {{ item.value.uwsgi_bind_address | default('0.0.0.0') }}:{{ item.value.uwsgi_port | default(8080) }},{{ item.value.uwsgi_tls.crt }},{{ item.value.uwsgi_tls.key }},HIGH
+{% else %}
 http-socket = {{ item.value.uwsgi_bind_address | default('0.0.0.0') }}:{{ item.value.uwsgi_port | default(8080) }}
+{% endif %}
 
 master = true
 enable-threads = true
