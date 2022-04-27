@@ -1,5 +1,5 @@
 ---
-# Copyright 2019, VEXXHOST, Inc.
+# Copyright 2021, BBC R&D
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +18,14 @@ cache_timeout: 600
 
 uwsgi_bin: '/usr/bin'
 
+_uwsgi_distro_libpython:
+  buster: libpython3.7
+  bullseye: libpython3.9
+  focal: libpython3.8
+  jammy: libpython3.10
+
 uwsgi_distro_packages:
-  - libpython3.6
+  - "{{ _uwsgi_distro_libpython[ansible_facts['distribution_release'] | lower] }}"
   - uwsgi
   - uwsgi-plugin-python3
 
