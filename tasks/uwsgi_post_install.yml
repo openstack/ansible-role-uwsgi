@@ -26,7 +26,6 @@
     config_overrides: "{{ item.value.uwsgi_overrides | default({}) | combine(uwsgi_ini_overrides, recursive=True) }}"
   with_dict: "{{ uwsgi_services }}"
   notify:
-    - Manage LB
     - Restart uwsgi services
 
 - name: Run the systemd service role
