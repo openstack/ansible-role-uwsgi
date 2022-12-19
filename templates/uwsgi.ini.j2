@@ -13,11 +13,18 @@ wsgi-file = {{ item.value.wsgi_path }}
 {% elif 'wsgi' in item.value %}
 wsgi = {{ item.value.wsgi }}
 {% endif %}
-{% if item.value.uwsgi_tls | default({}) | length %}
-https-socket = {{ item.value.uwsgi_bind_address | default('0.0.0.0') }}:{{ item.value.uwsgi_port | default(8080) }},{{ item.value.uwsgi_tls.crt }},{{ item.value.uwsgi_tls.key }},HIGH
+{% if (item.value.uwsgi_bind_address is defined) and (item.value.uwsgi_bind_address is not string) and (item.value.uwsgi_bind_address is iterable) %}
+{% set addresses = item.value.uwsgi_bind_address %}
 {% else %}
-http-socket = {{ item.value.uwsgi_bind_address | default('0.0.0.0') }}:{{ item.value.uwsgi_port | default(8080) }}
+{% set addresses = [item.value.uwsgi_bind_address | default('0.0.0.0')] %}
 {% endif %}
+{% for addr in addresses %}
+{% if item.value.uwsgi_tls | default({}) | length %}
+https-socket = {{ addr }}:{{ item.value.uwsgi_port | default(8080) }},{{ item.value.uwsgi_tls.crt }},{{ item.value.uwsgi_tls.key }},HIGH
+{% else %}
+http-socket = {{ addr }}:{{ item.value.uwsgi_port | default(8080) }}
+{% endif %}
+{% endfor %}
 
 master = true
 enable-threads = true
