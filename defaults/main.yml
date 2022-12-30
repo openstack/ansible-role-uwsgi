@@ -48,7 +48,7 @@ uwsgi_env: "{{ _uwsgi_env }}"
 #     uwsgi_overrides: {}
 #     uwsgi_processes: [ansible_facts['processor_vcpus'] | default(1), 1] | max * 2
 #     uwsgi_threads: 1
-#     uwsgi_bind_address: 0.0.0.0
+#     uwsgi_bind_address: 0.0.0.0   # OR a list, uwsgi_bind_address: [ '127.0.0.1', '1.2.3.4' ]
 #     uwsgi_port: 8080
 #     uwsgi_env: "FOO=bar"
 #     uwsgi_tls:
