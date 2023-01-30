@@ -46,7 +46,7 @@
       - service_name: "{{ service_var.value.service_name | default(service_var.key) }}"
         enabled: yes
         state: started
-        execstarts: "{{ uwsgi_bin }}/uwsgi --autoload --ini /etc/uwsgi/{{ service_var.key }}.ini"
+        execstarts: "{{ uwsgi_bin }}/uwsgi --autoload --ini /etc/uwsgi/{{ service_var.key }}.ini {{ (service_var.value.uwsgi_pyargv is defined) | ternary('--pyargv  \"' ~ service_var.value.uwsgi_pyargv | default('') ~ '\"', '') }}"
         execreloads: "{{ uwsgi_bin }}/uwsgi --reload {{ uwsgi_run_dir }}/{{ service_var.key }}/{{ uwsgi_system_slice_name }}/{{ service_var.key }}.pid"
         config_overrides: "{{ service_var.value.init_config_overrides | default({}) | combine(uwsgi_init_config_overrides, recursive=True) }}"
   with_dict: "{{ uwsgi_services }}"
