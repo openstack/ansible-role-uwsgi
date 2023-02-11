@@ -54,6 +54,7 @@ uwsgi_env: "{{ _uwsgi_env }}"
 #     uwsgi_tls:
 #       crt: /path/to/crt
 #       key: /path/to/key
+#     uwsgi_pyargv: "--foo=bar --config_file=/etc/foo/foo.conf"
 uwsgi_services: {}
 
 # Override can be used to apply config change to all uwsgi services
