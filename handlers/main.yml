@@ -27,3 +27,4 @@
   listen:
     - "Restart uwsgi services"
     - "venv changed"
+    - "systemd service changed"

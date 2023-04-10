@@ -44,8 +44,8 @@
     systemd_TasksAccounting: true
     systemd_services:
       - service_name: "{{ service_var.value.service_name | default(service_var.key) }}"
-        enabled: yes
-        state: started
+        enabled: "{{ service_var.value.enabled | default(True) }}"
+        state: "{{ service_var.value.state | default('started') }}"
         execstarts: "{{ uwsgi_bin }}/uwsgi --autoload --ini /etc/uwsgi/{{ service_var.key }}.ini"
         execreloads: "{{ uwsgi_bin }}/uwsgi --reload {{ uwsgi_run_dir }}/{{ service_var.key }}/{{ uwsgi_system_slice_name }}/{{ service_var.key }}.pid"
         config_overrides: "{{ service_var.value.init_config_overrides | default({}) | combine(uwsgi_init_config_overrides, recursive=True) }}"
