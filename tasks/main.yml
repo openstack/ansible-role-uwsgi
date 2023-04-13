@@ -35,12 +35,20 @@
   tags:
     - always
 
-- import_tasks: uwsgi_install.yml
+- include_tasks: uwsgi_install.yml
+  args:
+    apply:
+      tags:
+        - uwsgi-install
   when: uwsgi_services | length > 0
   tags:
     - uwsgi-install
 
-- import_tasks: uwsgi_post_install.yml
+- include_tasks: uwsgi_post_install.yml
+  args:
+    apply:
+      tags:
+        - uwsgi-install
   when: uwsgi_services | length > 0
   tags:
     - uwsgi-config
