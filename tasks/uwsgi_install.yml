@@ -44,7 +44,7 @@
     - Restart uwsgi services
 
 - name: Install the python venv
-  import_role:
+  include_role:
     name: "python_venv_build"
   vars:
     venv_install_destination_path: "{{ uwsgi_bin | dirname }}"
