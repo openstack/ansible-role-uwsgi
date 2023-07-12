@@ -35,7 +35,8 @@
   tags:
     - always
 
-- include_tasks: uwsgi_install.yml
+- name: Including uwsgi_install tasks
+  include_tasks: uwsgi_install.yml
   args:
     apply:
       tags:
@@ -44,7 +45,8 @@
   tags:
     - uwsgi-install
 
-- include_tasks: uwsgi_post_install.yml
+- name: Including uwsgi_post_install tasks
+  include_tasks: uwsgi_post_install.yml
   args:
     apply:
       tags:

@@ -2,19 +2,21 @@ galaxy_info:
   author: vexxhost
   description: Installation and configuration of uwsgi
   company: Vexxhost
+  role_name: uwsgi
+  namespace: openstack
   license: Apache2
-  min_ansible_version: 2.8
+  min_ansible_version: "2.10"
   platforms:
     - name: Debian
       versions:
-        - buster
+        - bullseye
     - name: Ubuntu
       versions:
-        - bionic
         - focal
+        - jammy
     - name: EL
       versions:
-        - 8
+        - "9"
   galaxy_tags:
     - cloud
     - uwsgi
