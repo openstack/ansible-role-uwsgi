@@ -21,6 +21,7 @@ uwsgi_bin: '/usr/bin'
 _uwsgi_distro_libpython:
   buster: libpython3.7
   bullseye: libpython3.9
+  bookworm: libpython3.11
   focal: libpython3.8
   jammy: libpython3.10
 
