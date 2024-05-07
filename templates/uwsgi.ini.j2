@@ -47,3 +47,7 @@ safe-pidfile = {{ uwsgi_run_dir }}/{{ item.key }}/{{ uwsgi_system_slice_name }}/
 log-x-forwarded-for = true
 # Avoid filling up the logs with health check requests from haproxy.
 route-user-agent = ^osa-haproxy-healthcheck$ donotlog:
+
+ignore-sigpipe = true
+ignore-write-errors = true
+disable-write-exception = true
