@@ -21,5 +21,10 @@ uwsgi_distro_packages:
 
 uwsgi_build_distro_package_list:
   - openssl-devel
+  - pcre-devel
+
+uwsgi_source_package_list:
+  - openssl
+  - pcre
 
 _uwsgi_env: "REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt"
