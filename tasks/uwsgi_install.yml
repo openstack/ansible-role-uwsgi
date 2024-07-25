@@ -50,6 +50,7 @@
     venv_pip_install_args: "{{ uwsgi_pip_install_args }}"
     venv_pip_packages: "{{ uwsgi_pip_packages }}"
     venv_build_distro_package_list: "{{ uwsgi_build_distro_package_list }}"
+    venv_install_distro_package_list: "{{ uwsgi_source_package_list }}"
     venv_python_executable: "{{ uwsgi_python_executable }}"
     venv_facts_when_changed:
       - section: 'uwsgi'

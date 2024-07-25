@@ -34,4 +34,8 @@ uwsgi_build_distro_package_list:
   - libssl-dev
   - libpcre3-dev
 
+uwsgi_source_package_list:
+  - libssl3
+  - libpcre3
+
 _uwsgi_env: "REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt"
