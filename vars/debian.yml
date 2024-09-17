@@ -24,6 +24,7 @@ _uwsgi_distro_libpython:
   bookworm: libpython3.11
   focal: libpython3.8
   jammy: libpython3.10
+  noble: libpython3.12
 
 uwsgi_distro_packages:
   - "{{ _uwsgi_distro_libpython[ansible_facts['distribution_release'] | lower] }}"
