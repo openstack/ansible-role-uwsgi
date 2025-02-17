@@ -14,13 +14,13 @@
 # limitations under the License.
 
 - name: Create uWSGI system group
-  group:
+  ansible.builtin.group:
     name: "{{ uwsgi_system_group_name }}"
     state: "present"
     system: "yes"
 
 - name: Create uWSGI system user
-  user:
+  ansible.builtin.user:
     name: "{{ uwsgi_system_user_name }}"
     group: "{{ uwsgi_system_group_name }}"
     comment: "uwsgi user"
@@ -30,7 +30,7 @@
     home: "/var/lib/{{ uwsgi_system_user_name }}"
 
 - name: Install distro packages
-  package:
+  ansible.builtin.package:
     name: "{{ uwsgi_package_list }}"
     state: "{{ uwsgi_package_state }}"
     update_cache: "{{ (ansible_facts['pkg_mgr'] == 'apt') | ternary('yes', omit) }}"
@@ -43,7 +43,7 @@
     - Restart uwsgi services
 
 - name: Install the python venv
-  include_role:
+  ansible.builtin.include_role:
     name: "python_venv_build"
   vars:
     venv_install_destination_path: "{{ uwsgi_bin | dirname }}"

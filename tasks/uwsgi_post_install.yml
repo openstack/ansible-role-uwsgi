@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Ensure uWSGI directory exists
-  file:
+  ansible.builtin.file:
     path: "/etc/uwsgi/"
     state: directory
     mode: "0755"
@@ -30,7 +30,7 @@
     - Restart uwsgi services
 
 - name: Run the systemd service role
-  include_role:
+  ansible.builtin.include_role:
     name: systemd_service
   vars:
     systemd_user_name: "{{ service_var.value.uwsgi_uid | default(uwsgi_system_user_name) }}"

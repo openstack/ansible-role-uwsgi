@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Execute service restart
-  service:
+  ansible.builtin.service:
     name: "{{ service.key }}"
     state: restarted
   with_dict: "{{ uwsgi_services }}"

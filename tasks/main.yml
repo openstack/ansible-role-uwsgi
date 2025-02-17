@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Gather variables for each operating system
-  include_vars: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   when: uwsgi_services | length > 0
   vars:
     params:
@@ -30,13 +30,13 @@
     - always
 
 - name: Gather variables for installation method
-  include_vars: "{{ uwsgi_install_method }}_install.yml"
+  ansible.builtin.include_vars: "{{ uwsgi_install_method }}_install.yml"
   when: uwsgi_services | length > 0
   tags:
     - always
 
 - name: Including uwsgi_install tasks
-  include_tasks: uwsgi_install.yml
+  ansible.builtin.include_tasks: uwsgi_install.yml
   args:
     apply:
       tags:
@@ -46,7 +46,7 @@
     - uwsgi-install
 
 - name: Including uwsgi_post_install tasks
-  include_tasks: uwsgi_post_install.yml
+  ansible.builtin.include_tasks: uwsgi_post_install.yml
   args:
     apply:
       tags:
