@@ -16,7 +16,7 @@
 ## APT Cache options
 cache_timeout: 600
 
-uwsgi_bin: '/usr/bin'
+uwsgi_bin: "/usr/bin"
 
 _uwsgi_distro_libpython:
   buster: libpython3.7

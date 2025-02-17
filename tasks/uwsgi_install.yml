@@ -53,7 +53,7 @@
     venv_install_distro_package_list: "{{ uwsgi_source_package_list }}"
     venv_python_executable: "{{ uwsgi_python_executable }}"
     venv_facts_when_changed:
-      - section: 'uwsgi'
-        option: 'venv_tag'
+      - section: "uwsgi"
+        option: "venv_tag"
         value: "{{ uwsgi_venv_tag }}"
   when: uwsgi_install_method == 'source'
