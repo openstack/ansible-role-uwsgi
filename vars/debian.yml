@@ -35,8 +35,15 @@ uwsgi_build_distro_package_list:
   - libssl-dev
   - libpcre3-dev
 
+_uwsgi_package_names_condition: >-
+  {{
+    (
+      (ansible_facts['distribution'] | lower == 'debian' and ansible_facts['distribution_major_version'] is version('12', '<=')) or
+        (ansible_facts['distribution'] | lower == 'ubuntu' and ansible_facts['distribution_major_version'] is version('24.04', '<')))
+  }}
+
 uwsgi_source_package_list:
-  - libssl3
+  - "{{ _uwsgi_package_names_condition | ternary('libssl3', 'libssl3t64') }}"
   - libpcre3
 
 _uwsgi_env: "REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt"
