@@ -22,6 +22,7 @@ _uwsgi_distro_libpython:
   buster: libpython3.7
   bullseye: libpython3.9
   bookworm: libpython3.11
+  trixie: libpython3.13
   focal: libpython3.8
   jammy: libpython3.10
   noble: libpython3.12
@@ -31,19 +32,19 @@ uwsgi_distro_packages:
   - uwsgi
   - uwsgi-plugin-python3
 
-uwsgi_build_distro_package_list:
-  - libssl-dev
-  - libpcre3-dev
-
 _uwsgi_package_names_condition: >-
   {{
     (
-      (ansible_facts['distribution'] | lower == 'debian' and ansible_facts['distribution_major_version'] is version('12', '<=')) or
+      (ansible_facts['distribution'] | lower == 'debian' and ansible_facts['distribution_major_version'] is version('13', '<')) or
         (ansible_facts['distribution'] | lower == 'ubuntu' and ansible_facts['distribution_major_version'] is version('24.04', '<')))
   }}
 
+uwsgi_build_distro_package_list:
+  - libssl-dev
+  - "{{ _uwsgi_package_names_condition | ternary('libpcre3-dev', 'libpcre2-dev') }}"
+
 uwsgi_source_package_list:
   - "{{ _uwsgi_package_names_condition | ternary('libssl3', 'libssl3t64') }}"
-  - libpcre3
+  - "{{ _uwsgi_package_names_condition | ternary('libpcre3', 'libpcre2-8-0') }}"
 
 _uwsgi_env: "REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt"
