@@ -1,5 +1,6 @@
 ---
 # Copyright 2019, VEXXHOST, Inc.
+# Copyright 2025, Cleura AB.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,10 +22,10 @@ uwsgi_distro_packages:
 
 uwsgi_build_distro_package_list:
   - openssl-devel
-  - pcre-devel
+  - pcre2-devel
 
 uwsgi_source_package_list:
   - openssl
-  - pcre
+  - pcre2
 
 _uwsgi_env: "REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt"
