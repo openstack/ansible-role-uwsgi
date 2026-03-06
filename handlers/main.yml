@@ -15,7 +15,7 @@
 
 - name: Execute service restart
   ansible.builtin.service:
-    name: "{{ service.key }}"
+    name: "{{ service.value.service_name | default(service.key) }}"
     state: restarted
   with_dict: "{{ uwsgi_services }}"
   loop_control:

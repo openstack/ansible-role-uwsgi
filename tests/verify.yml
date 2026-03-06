@@ -1,0 +1,56 @@
+---
+
+- name: Verify uwsgi deployment
+  hosts: uwsgi
+  tasks:
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Check uwsgi configuration file
+      ansible.builtin.stat:
+        path: /etc/uwsgi/test-api.ini
+      register: _uwsgi_conf_file
+
+    - name: Check uwsgi venv
+      ansible.builtin.command:
+        argv:
+          - /openstack/venvs/uwsgi-untagged-python3/bin/pip3
+          - list
+          - --format
+          - json
+      register: _uwsgi_pip_list
+      changed_when: false
+
+    - name: Verify uwsgi installation
+      ansible.builtin.assert:
+        that:
+          - _uwsgi_conf_file.stat.isreg
+          - _uwsgi_pip_list.stdout | from_json | selectattr('name', 'eq', 'uWSGI') | length > 0
+          - "'test-molecule.service' in ansible_facts['services']"
+          - ansible_facts['services']['test-molecule.service']['status'] == 'enabled'
+          - ansible_facts['services']['test-molecule.service']['state'] == 'running'
+
+    - name: Check connection to the uwsgi app
+      ansible.builtin.uri:
+        url: http://{{ molecule_bind_host }}:8181
+        return_content: true
+      register: _wsgi_content
+
+    - name: Verify wsgi reply
+      ansible.builtin.assert:
+        that:
+          - _wsgi_content['content'] == molecule_wsgi_content
+          - _wsgi_content['status'] == 200
+          - now(utc=true, fmt='%a, %d %b %Y %H:%M') in _wsgi_content['x_venv_test_time']
+
+    - name: Check uwsgi stats
+      ansible.builtin.uri:
+        url: http://{{ molecule_bind_host }}:9191
+        return_content: true
+      register: _wsgi_stats
+
+    - name: Verify uwsgi stats
+      ansible.builtin.assert:
+        that:
+          - _wsgi_stats['status'] == 200
+          - _wsgi_stats['json']['workers'] | length == molecule_uwsgi_workers

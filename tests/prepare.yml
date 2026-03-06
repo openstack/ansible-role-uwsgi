@@ -1,0 +1,42 @@
+---
+- name: Prepare uwsgi host
+  hosts: uwsgi
+  tasks:
+    - name: Place a simple uwsgi script
+      ansible.builtin.copy:
+        content: |
+          import os
+          import pendulum
+
+          def application(environ, start_response):
+            status = '200 OK'
+            headers = [
+                ('Content-Type', 'text/plain'),
+                ('X-Venv-Test-Time', pendulum.now('UTC').to_rfc1123_string()),
+                ('X-Module-Path', pendulum.__file__)
+            ]
+
+            start_response(status, headers)
+            return [os.getenv("MOLECULE_TEST_REPLY").encode()]
+        dest: "{{ molecule_uwsgi_file }}"
+        mode: "0644"
+
+    - name: Install required packages
+      vars:
+        _install_packages:
+          redhat:
+            - python3-packaging
+          debian:
+            - python3-packaging
+            - python3-venv
+      ansible.builtin.package:
+        name: "{{ _install_packages[ansible_facts['os_family'] | lower] }}"
+        state: present
+        update_cache: "{{ (ansible_facts['os_family'] | lower == 'debian') }}"
+
+    - name: Create virtualenv
+      ansible.builtin.pip:
+        name:
+          - pendulum
+        virtualenv: "{{ molecule_app_virtualenv }}"
+        virtualenv_command: python3 -m venv

@@ -1,0 +1,20 @@
+---
+collections:
+  - name: https://github.com/ansible-collections/community.general
+    type: git
+    version: main
+  - name: https://opendev.org/openstack/ansible-config_template
+    version: master
+    type: git
+  - name: https://opendev.org/openstack/openstack-ansible-plugins
+    version: master
+    type: git
+roles:
+  - name: python_venv_build
+    version: master
+    scm: git
+    src: https://opendev.org/openstack/ansible-role-python_venv_build
+  - name: systemd_service
+    version: master
+    scm: git
+    src: https://opendev.org/openstack/ansible-role-systemd_service

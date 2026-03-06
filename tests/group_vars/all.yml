@@ -1,0 +1,7 @@
+---
+
+molecule_uwsgi_file: /opt/wsgi.py
+molecule_app_virtualenv: /opt/venvs/app
+molecule_bind_host: 127.0.0.1
+molecule_wsgi_content: MoleculeWSGITest
+molecule_uwsgi_workers: 3

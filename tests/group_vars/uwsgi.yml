@@ -1,0 +1,16 @@
+---
+
+uwsgi_services:
+  test-api:
+    uwsgi_overrides:
+      uwsgi:
+        stats: "{{ molecule_bind_host }}:9191"
+        stats-http: true
+    uwsgi_bind_address: "{{ molecule_bind_host }}"
+    uwsgi_port: 8181
+    wsgi_venv: "{{ molecule_app_virtualenv }}"
+    wsgi_path: "{{ molecule_uwsgi_file }}"
+    uwsgi_processes: "{{ molecule_uwsgi_workers }}"
+    uwsgi_threads: 2
+    uwsgi_env: "MOLECULE_TEST_REPLY={{ molecule_wsgi_content }}"
+    service_name: test-molecule

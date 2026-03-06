@@ -1,0 +1,6 @@
+---
+
+- name: Run uwsgi role
+  hosts: uwsgi
+  roles:
+    - role: uwsgi
