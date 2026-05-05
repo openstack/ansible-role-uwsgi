@@ -26,6 +26,7 @@ _uwsgi_distro_libpython:
   focal: libpython3.8
   jammy: libpython3.10
   noble: libpython3.12
+  resolute: libpython3.14
 
 uwsgi_distro_packages:
   - "{{ _uwsgi_distro_libpython[ansible_facts['distribution_release'] | lower] }}"
@@ -40,6 +41,7 @@ _uwsgi_package_names_condition: >-
   }}
 
 uwsgi_build_distro_package_list:
+  - libcrypt-dev
   - libssl-dev
   - "{{ _uwsgi_package_names_condition | ternary('libpcre3-dev', 'libpcre2-dev') }}"
 
