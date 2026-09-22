@@ -1,9 +1,7 @@
 ---
 dependency:
   name: galaxy
-  options:
-    requirements-file: requirements.yml
-    force: ${GALAXY_FORCE:-false}
+  enabled: false
 
 driver:
   name: docker
@@ -31,6 +29,7 @@ provisioner:
   config_options:
     defaults:
       inject_facts_as_vars: false
+      remote_tmp: /tmp/.ansible-${USER}/tmp
 
 scenario:
   name: default

@@ -1,5 +1,8 @@
 ---
 collections:
+  - name: community.library_inventory_filtering_v1
+    source: https://github.com/ansible-collections/community.library_inventory_filtering
+    type: git
   - name: https://github.com/ansible-collections/community.general
     type: git
     version: main
