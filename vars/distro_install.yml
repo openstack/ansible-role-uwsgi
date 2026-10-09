@@ -14,4 +14,3 @@
 # limitations under the License.
 
 uwsgi_package_list: "{{ uwsgi_distro_packages }}"
-uwsgi_pip_packages: []

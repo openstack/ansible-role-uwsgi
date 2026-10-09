@@ -26,6 +26,13 @@ uwsgi_install_method: source
 uwsgi_venv_tag: "{{ venv_tag | default('untagged') }}"
 
 uwsgi_pip_install_args: "{{ pip_install_options | default('') }}"
+
+# In order to build uWSGI from source rather then install from PyPI
+# you can define it like:
+# - uwsgi@git+https://github.com/unbit/uwsgi@master
+uwsgi_pip_packages:
+  - uwsgi
+
 uwsgi_python_executable: "python3"
 
 uwsgi_package_state: "latest"
